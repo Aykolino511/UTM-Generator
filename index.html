@@ -1,26 +1,34 @@
-<!DOCTYPE html>\n<html lang="de" class="scroll-smooth"><head>
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBUPS - ©AykolinoApps</title>
+    <!-- Setze hier deinen neuen Titel -->
+    <title>© AykolinoApps - UTM generator</title>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (Wichtig für das Layout) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter (Wichtig für die Schriftart) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Du kannst hier dein eigenes Favicon verlinken -->
     <link rel="icon" href="favicon-32x32.png" type="image/x-icon">
 
     <style>
-        /* Globale Stile & Animationen */
+        /* --- ÜBERNOMMENE GLOBALE STILE & FARBEN --- */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
+            /* Hintergrund- und Textfarbe der Website */
+            /* HINZUGEFÜGT: !important, um die Hintergrundfarbe von eingefügtem Code zu überschreiben */
+            background-color: #0a0a0a !important;
             color: #f5f5f5;
             overflow-x: hidden;
         }
 
+        /* Verlauf-Text (genutzt in der Navigation) */
         .gradient-text {
             background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
             -webkit-background-clip: text;
@@ -29,20 +37,7 @@
             text-fill-color: transparent;
         }
 
-        .card {
-            background-color: rgba(23, 23, 23, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(139, 92, 246, 0.5); /* Violet-500 */
-        }
-
+        /* Hintergrund-Leuchteffekt */
         .glow-effect {
             position: absolute;
             top: -50%;
@@ -58,19 +53,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Scroll-in Animation */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Header Stile */
+        /* --- ÜBERNOMMENE HEADER & SPRACHAUSWAHL STILE --- */
         .header {
             animation: fadeInDown 0.8s ease-out;
         }
@@ -91,7 +74,7 @@
             }
         }
 
-        /* --- NEUE & VERBESSERTE Sprachauswahl Stile --- */
+        /* Stile für das Sprachauswahl-Dropdown */
         .lang-switcher-dropdown {
             position: absolute;
             top: 100%;
@@ -101,10 +84,9 @@
             border-radius: 0.5rem; /* rounded-lg */
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-            width: 160px; /* Etwas breiter für die Flaggen */
+            width: 160px; 
             z-index: 60;
             overflow: hidden;
-            /* Animations-Eigenschaften */
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
@@ -117,33 +99,30 @@
             transform: translateY(0);
         }
 
-        /* --- Logo Animationen --- */
-        .logo-utm { position: relative; width: 80px; height: 80px; }
-        .utm-center { position: absolute; width: 16px; height: 16px; background-color: #3b82f6; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 2s infinite ease-in-out; }
-        .utm-dot { position: absolute; width: 8px; height: 8px; background-color: #a78bfa; border-radius: 50%; top: 50%; left: 50%; margin: -4px; }
-        .utm-dot:nth-child(2) { animation: utm-orbit 4s infinite linear; animation-delay: 0s; }
-        .utm-dot:nth-child(3) { animation: utm-orbit 4s infinite linear; animation-delay: -1s; }
-        .utm-dot:nth-child(4) { animation: utm-orbit 4s infinite linear; animation-delay: -2s; }
-        .utm-dot:nth-child(5) { animation: utm-orbit 4s infinite linear; animation-delay: -3s; }
-        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); } 50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0); } }
-        @keyframes utm-orbit { from { transform: rotate(0deg) translateX(30px) rotate(0deg); } to { transform: rotate(360deg) translateX(30px) rotate(-360deg); } }
-        .logo-html { width: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between; font-size: 2.5rem; font-weight: bold; color: #ec4899; }
-        .html-arrow { font-size: 1.5rem; animation: html-translate 2s infinite ease-in-out; color: #f5f5f5; }
-        @keyframes html-translate { 0%, 100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(8px) scale(1.1); opacity: 1; } }
-        .logo-excel { width: 80px; height: 80px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .excel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: 30px; height: 40px; }
-        .excel-cell { width: 8px; height: 8px; background-color: #10b981; border-radius: 1px; opacity: 0.6; }
-        .excel-grid .excel-cell:nth-child(2) { background-color: #3b82f6; } .excel-grid .excel-cell:nth-child(5) { animation: excel-blink 2.5s infinite; animation-delay: 0.5s; } .excel-grid .excel-cell:nth-child(8) { background-color: #f97316; }
-        @keyframes excel-blink { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.4); opacity: 1; } }
-        .logo-an { width: 80px; height: 80px; background-color: rgba(255,255,255,0.05); border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 1.5rem; color: #facc15; overflow: hidden; }
-        .an-reel { animation: an-scroll-reel 4.5s infinite; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
-        .an-number-item { height: 80px; display: flex; justify-content: center; align-items: center; }
-        @keyframes an-scroll-reel { 0%, 25% { transform: translateY(0); } 30%, 55% { transform: translateY(-80px); } 60%, 85% { transform: translateY(-160px); } 90%, 100% { transform: translateY(-240px); } }
+        /* FIX (Version 4): Die CSS-Regel 'main { padding-top: 10rem; }' 
+          wurde von hier entfernt. Der Abstand wird jetzt direkt 
+          als Tailwind-Klasse 'pt-40' (10rem) zum <main>-Tag hinzugefügt.
+        */
+
     </style>
 </head>
-<body class="" style=""><div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden">
+<body>
+
+    <!-- ÜBERNOMMEN: Background Glow -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden">
         <div class="glow-effect"></div>
-    </div><div class="container mx-auto px-4 sm:px-6 lg:px-8"><nav id="main-header" class="header fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-transparent transition-colors duration-300">
+    </div>
+
+    <!-- ÜBERNOMMEN: Main Container -->
+    <!-- 
+      FIX (Version 7):
+      - 'min-h-screen' und 'flex flex-col' hinzugefügt.
+      - Dieser Container steuert jetzt das Layout und drückt den Footer nach unten.
+    -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
+
+        <!-- ÜBERNOMMEN: Header / Navigation -->
+        <nav id="main-header" class="header fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-transparent transition-colors duration-300">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-20">
                     <a href="https://aykolino.de" class="text-2xl font-bold tracking-tight text-white">
@@ -211,7 +190,75 @@
                     </a>
                 </div>
             </div>
-        </nav><main class="pt-24 flex flex-col items-center">
+        </nav>
+
+        <!-- 
+        *************************************************
+        * *
+        * NEUER FIX (Version 5): "SPACER-BLOCK"       *
+        * *
+        * Dieser Block ist exakt so hoch wie die        *
+        * Navigationsleiste (h-20 = 5rem / 80px).     *
+        * Er ist unsichtbar und drückt allen Inhalt,  *
+        * der danach kommt, physisch nach unten.      *
+        * *
+        ************************************************* -->
+        <div class="h-20"></div>
+        <!-- *********************************************** -->
+
+
+        <!-- 
+        *************************************************
+        * HIER DEINEN NEUEN SEITENINHALT EINFÜGEN     *
+        * *
+        ************************************************* -->
+        
+        <!-- 
+          FIX (Version 7):
+          - 'min-h-screen' ENTFERNT.
+          - 'pb-24' (großer Abstand) ENTFERNT.
+          - 'flex-grow' HINZUGEFÜGT. Main füllt jetzt den leeren Platz.
+          - 'flex flex-col items-center' bleibt, um den Inhalt zu zentrieren.
+        -->
+        <main class="flex-grow flex flex-col items-center">
+            
+            <!-- 
+              WICHTIG: Der alte Wrapper '<div class="max-w-5xl mx-auto...">' 
+              wurde ENTFERNT. 
+              
+              Füge deinen App-Code direkt hier ein, oder ersetze 
+              diesen gesamten <main>-Block durch deinen Code.
+            -->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA - AykolinoApps - UTM Code Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* For a subtle scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-300 min-h-screen flex items-center justify-center p-4">
     
     <div class="w-full max-w-2xl">
         <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8 space-y-6 border border-slate-700">
@@ -223,7 +270,7 @@
                 <div>
                     <label for="website-url" class="block text-sm font-medium mb-1 text-slate-400">Website-URL *</label>
                     <div class="flex items-center space-x-2">
-                        <input type="url" id="website-url" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition" placeholder="https://example.com" required="">
+                        <input type="url" id="website-url" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition" placeholder="https://example.com" required>
                         <button id="paste-btn" class="bg-blue-600 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 whitespace-nowrap">Einfügen</button>
                     </div>
                 </div>
@@ -263,7 +310,7 @@
             <div class="pt-4">
                 <label class="block text-sm font-medium mb-1 text-slate-400">Generierte URL</label>
                 <div class="flex items-center space-x-2">
-                    <input id="generated-url" readonly="" class="w-full bg-slate-700 text-slate-200 border border-slate-600 rounded-lg p-2.5 select-all break-all cursor-copy">
+                    <input id="generated-url" readonly class="w-full bg-slate-700 text-slate-200 border border-slate-600 rounded-lg p-2.5 select-all break-all cursor-copy">
                     <button id="copy-btn" class="bg-pink-600 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-pink-700 transition-colors duration-200">Kopieren</button>
                 </div>
             </div>
@@ -275,232 +322,339 @@
     </div>
 
 
-    
+    <script>
+        // DOM Elements
+        const inputs = {
+            url: document.getElementById('website-url'),
+            source: document.getElementById('utm-source'),
+            medium: document.getElementById('utm-medium'),
+            campaign: document.getElementById('utm-campaign'),
+            content: document.getElementById('utm-content'),
+            term: document.getElementById('utm-term'),
+        };
+        const generatedUrlInput = document.getElementById('generated-url');
+        const pasteBtn = document.getElementById('paste-btn');
+        const copyBtn = document.getElementById('copy-btn');
+
+        // Function to generate the UTM URL
+        const generateUrl = () => {
+            let baseUrl = inputs.url.value.trim();
+
+            if (!baseUrl) {
+                generatedUrlInput.value = '';
+                return;
+            }
+
+            // Add http:// if no protocol is present
+            if (!/^(https?:\/\/)/i.test(baseUrl)) {
+                baseUrl = 'https://' + baseUrl;
+            }
+
+            try {
+                const url = new URL(baseUrl);
+
+                // Clear existing UTM params to avoid duplicates
+                const paramsToDelete = [];
+                url.searchParams.forEach((value, key) => {
+                    if (key.startsWith('utm_')) {
+                        paramsToDelete.push(key);
+                    }
+                });
+                paramsToDelete.forEach(key => url.searchParams.delete(key));
+
+                // Add UTM parameters
+                if (inputs.source.value.trim()) url.searchParams.set('utm_source', inputs.source.value.trim());
+                if (inputs.medium.value.trim()) url.searchParams.set('utm_medium', inputs.medium.value.trim());
+                if (inputs.campaign.value.trim()) url.searchParams.set('utm_campaign', inputs.campaign.value.trim());
+                if (inputs.content.value.trim()) url.searchParams.set('utm_content', inputs.content.value.trim());
+                if (inputs.term.value.trim()) url.searchParams.set('utm_term', inputs.term.value.trim());
+                
+                generatedUrlInput.value = url.toString();
+
+            } catch (error) {
+                // Handle invalid URL
+                generatedUrlInput.value = 'Ungültige URL';
+            }
+        };
+
+        // Event Listeners for all inputs
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', generateUrl);
+        });
+
+        // Paste button functionality
+        pasteBtn.addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                inputs.url.value = text;
+                generateUrl();
+            } catch (err) {
+                console.error('Fehler beim Lesen der Zwischenablage: ', err);
+            }
+        });
+
+        // Copy button functionality
+        copyBtn.addEventListener('click', () => {
+            const urlToCopy = generatedUrlInput.value;
+            if (!urlToCopy || urlToCopy === 'Ungültige URL') return;
+            
+            // Using document.execCommand for better compatibility in iFrames
+            const tempInput = document.createElement('input');
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-9999px';
+            tempInput.value = urlToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                document.execCommand('copy');
+                // Visual feedback
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Kopiert!';
+                copyBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                copyBtn.classList.remove('bg-pink-600', 'hover:bg-pink-700');
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    copyBtn.classList.add('bg-pink-600', 'hover:bg-pink-700');
+                }, 2000);
+            } catch (err) {
+                console.error('Kopieren fehlgeschlagen: ', err);
+            }
+            
+            document.body.removeChild(tempInput);
+        });
+        
+        // Also copy when clicking the generated URL field itself
+        generatedUrlInput.addEventListener('click', () => {
+             if (generatedUrlInput.value) {
+                copyBtn.click();
+            }
+        });
+
+        // Marquee Title Effect
+        (function() {
+            const originalTitle = document.title + " ";
+            let titleText = originalTitle;
+            function marquee() {
+                titleText = titleText.substring(1, titleText.length) + titleText.substring(0, 1);
+                document.title = titleText;
+            }
+            setInterval(marquee, 300); // Speed in milliseconds
+        })();
+    </script>
+</body>
+</html>
+
+        </main>
+        <!-- *********************************************** -->
+        <!-- * ENDE DES NEUEN INHALTS             * -->
+        <!-- *********************************************** -->
 
 
-
-</main><footer class="text-center py-10 mt-20 border-t border-gray-800">
+        <!-- ÜBERNOMMEN: Footer -->
+        <!-- 
+          FIX (Version 7):
+          - 'mt-20' (großer Abstand) ENTFERNT.
+          - 'py-10' (normaler Abstand) BEIBEHALTEN.
+          - 'flex-shrink-0' HINZUGEFÜGT (sicherheitshalber).
+        -->
+        <footer class="text-center py-10 border-t border-gray-800 flex-shrink-0">
             <p class="text-gray-500" data-translate-key="footerText">
                 © <span id="year"></span> AykolinoApps. Mit Leidenschaft.
             </p>
             <p class="text-xs text-gray-600 mt-2" data-translate-key="footerDisclaimer">
                 Diese Domain wird nicht für gewerbliche Zwecke genutzt.
             </p>
-        </footer></div><script>
-const translations = {
-    'de': {
-        langName: 'DE', flagUrl: 'https://flagcdn.com/w40/de.png',
-        navAbout: 'Über mich', navContact: 'Kontakt', languageLabelMobile: 'Sprache:',
-        footerText: '© <span id="year-footer"></span> AykolinoApps. Mit Leidenschaft.', footerDisclaimer: 'Diese Domain wird nicht für gewerbliche Zwecke genutzt.',
-        pageTitle: 'HTML Translator Pro', mainTitle: 'HTML Translator Pro',
-        mainSubtitle: 'Übersetzt Textinhalte und passt Domain-Endungen (.de, .com etc.) in Links automatisch an.',
-        originalCodeLabel: 'Original-Code',
-        inputPlaceholder: 'HTML-Datei hierher ziehen oder Code einfügen...',
-        inputPlaceholderSpan: 'HTML-Datei hierher ziehen oder Code einfügen',
-        translatedCodeLabel: 'Übersetzter Code', copyButton: 'Kopieren',
-        langSelectGerman: 'Deutsch', langSelectEnglish: 'Englisch', langSelectFrench: 'Französisch',
-        langSelectItalian: 'Italienisch', langSelectSpanish: 'Spanisch',
-        translateButton: 'Übersetzen', downloadButton: 'Download',
-        utmGeneratorTitle: 'UTM Code Generator',
-        websiteUrlLabel: 'Website-URL *',
-        utmSourceLabel: 'UTM Source *',
-        utmMediumLabel: 'UTM Medium *',
-        utmCampaignLabel: 'UTM Campaign *',
-        utmContentLabel: 'UTM Content',
-        utmTermLabel: 'UTM Term',
-        generatedUrlLabel: 'Generierte URL',
-        pasteButton: 'Einfügen',
-        placeholderExampleUrl: 'https://example.com',
-        placeholderSource: 'z.B. newsletter, twitter, google',
-        placeholderMedium: 'z.B. E-mail, social, cpc',
-        placeholderCampaign: 'z.B. promotion, sale',
-        placeholderContent: 'z.B. any CTA, Headline',
-        placeholderTerm: 'Keywords für Ihre bezahlten Suchkampagnen'
-    },
-    'en': {
-        langName: 'EN', flagUrl: 'https://flagcdn.com/w40/gb.png',
-        navAbout: 'About Me', navContact: 'Contact', languageLabelMobile: 'Language:',
-        footerText: '© <span id="year-footer"></span> AykolinoApps. With passion.', footerDisclaimer: 'This domain is not used for commercial purposes.',
-        pageTitle: 'HTML Translator Pro', mainTitle: 'HTML Translator Pro',
-        mainSubtitle: 'Translates text content and automatically adjusts domain endings (.de, .com etc.) in links.',
-        originalCodeLabel: 'Original Code',
-        inputPlaceholder: 'Drag and drop HTML file here or paste code...',
-        inputPlaceholderSpan: 'Drag and drop HTML file here or paste code',
-        translatedCodeLabel: 'Translated Code', copyButton: 'Copy',
-        langSelectGerman: 'German', langSelectEnglish: 'English', langSelectFrench: 'French',
-        langSelectItalian: 'Italian', langSelectSpanish: 'Spanish',
-        translateButton: 'Translate', downloadButton: 'Download',
-        utmGeneratorTitle: 'UTM Code Generator',
-        websiteUrlLabel: 'Website URL *',
-        utmSourceLabel: 'UTM Source *',
-        utmMediumLabel: 'UTM Medium *',
-        utmCampaignLabel: 'UTM Campaign *',
-        utmContentLabel: 'UTM Content',
-        utmTermLabel: 'UTM Term',
-        generatedUrlLabel: 'Generated URL',
-        pasteButton: 'Paste',
-        placeholderExampleUrl: 'https://example.com',
-        placeholderSource: 'e.g. newsletter, twitter, google',
-        placeholderMedium: 'e.g. email, social, cpc',
-        placeholderCampaign: 'e.g. promotion, sale',
-        placeholderContent: 'e.g. any CTA, headline',
-        placeholderTerm: 'Keywords for your paid search campaigns'
-    },
-    'fr': {
-        langName: 'FR', flagUrl: 'https://flagcdn.com/w40/fr.png',
-        navAbout: 'À propos de moi', navContact: 'Contact', languageLabelMobile: 'Langue:',
-        footerText: '© <span id="year-footer"></span> AykolinoApps. Avec passion.', footerDisclaimer: "Ce domaine n'est pas utilisé à des fins commerciales.",
-        pageTitle: 'HTML Translator Pro', mainTitle: 'HTML Translator Pro',
-        mainSubtitle: 'Traduit le contenu textuel et ajuste automatiquement les extensions de domaine (.de, .com etc.) dans les liens.',
-        originalCodeLabel: 'Code Original',
-        inputPlaceholder: 'Glissez-déposez le fichier HTML ici ou collez le code...',
-        inputPlaceholderSpan: 'Glissez-déposez le fichier HTML ici ou collez le code',
-        translatedCodeLabel: 'Code Traduit', copyButton: 'Copier',
-        langSelectGerman: 'Allemand', langSelectEnglish: 'Anglais', langSelectFrench: 'Français',
-        langSelectItalian: 'Italien', langSelectSpanish: 'Espagnol',
-        translateButton: 'Traduire', downloadButton: 'Télécharger',
-        utmGeneratorTitle: 'Générateur de code UTM',
-        websiteUrlLabel: 'URL du site Web *',
-        utmSourceLabel: 'Source UTM *',
-        utmMediumLabel: 'Medium UTM *',
-        utmCampaignLabel: 'Campagne UTM *',
-        utmContentLabel: 'Contenu UTM',
-        utmTermLabel: 'Terme UTM',
-        generatedUrlLabel: 'URL générée',
-        pasteButton: 'Coller',
-        placeholderExampleUrl: 'https://example.com',
-        placeholderSource: 'par ex. newsletter, twitter, google',
-        placeholderMedium: 'par ex. e-mail, social, cpc',
-        placeholderCampaign: 'par ex. promotion, vente',
-        placeholderContent: 'par ex. tout CTA, titre',
-        placeholderTerm: 'Mots-clés pour vos campagnes de recherche payantes'
-    },
-    'es': {
-        langName: 'ES', flagUrl: 'https://flagcdn.com/w40/es.png',
-        navAbout: 'Sobre mí', navContact: 'Contacto', languageLabelMobile: 'Idioma:',
-        footerText: '© <span id="year-footer"></span> AykolinoApps. Con pasión.', footerDisclaimer: 'Este dominio no se utiliza con fines comerciales.',
-        pageTitle: 'HTML Translator Pro', mainTitle: 'HTML Translator Pro',
-        mainSubtitle: 'Traduce el contenido del texto y ajusta automáticamente las terminaciones de dominio (.de, .com etc.) en los enlaces.',
-        originalCodeLabel: 'Código Original',
-        inputPlaceholder: 'Arrastre y suelte el archivo HTML aquí o pegue el código...',
-        inputPlaceholderSpan: 'Arrastre y suelte el archivo HTML aquí o pegue el código',
-        translatedCodeLabel: 'Código Traducido', copyButton: 'Copiar',
-        langSelectGerman: 'Alemán', langSelectEnglish: 'Inglés', langSelectFrench: 'Francés',
-        langSelectItalian: 'Italiano', langSelectSpanish: 'Español',
-        translateButton: 'Traducir', downloadButton: 'Descargar',
-        utmGeneratorTitle: 'Generador de código UTM',
-        websiteUrlLabel: 'URL del sitio web *',
-        utmSourceLabel: 'Fuente UTM *',
-        utmMediumLabel: 'Medio UTM *',
-        utmCampaignLabel: 'Campaña UTM *',
-        utmContentLabel: 'Contenido UTM',
-        utmTermLabel: 'Término UTM',
-        generatedUrlLabel: 'URL generada',
-        pasteButton: 'Pegar',
-        placeholderExampleUrl: 'https://example.com',
-        placeholderSource: 'p.ej. newsletter, twitter, google',
-        placeholderMedium: 'p.ej. email, social, cpc',
-        placeholderCampaign: 'p.ej. promoción, venta',
-        placeholderContent: 'p.ej. cualquier CTA, titular',
-        placeholderTerm: 'Palabras clave para sus campañas de búsqueda de pago'
-    }
-};
+        </footer>
+    </div>
 
-function addTranslateKeys() {
-    const textToKeyMap = {};
-    const deTranslations = translations.de;
-    for (const key in deTranslations) {
-        const value = deTranslations[key];
-        if (typeof value === 'string' && value.length > 2 && !value.includes('<')) {
-            textToKeyMap[value.trim()] = key;
-        }
-    }
-
-    document.querySelectorAll('[placeholder]').forEach(el => {
-        const placeholderText = el.getAttribute('placeholder')?.trim();
-        if (placeholderText && textToKeyMap[placeholderText]) {
-            el.setAttribute('data-translate-key-placeholder', textToKeyMap[placeholderText]);
-        }
-    });
-
-    if (textToKeyMap[document.title.trim()]) {
-         document.documentElement.setAttribute('data-translate-key-title', textToKeyMap[document.title.trim()]);
-    }
-
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-
-    nodes.forEach(node => {
-        const text = node.nodeValue.trim();
-        if (textToKeyMap[text]) {
-            const parent = node.parentElement;
-            if (parent && !parent.closest('script, style') && !parent.hasAttribute('data-translate-key')) {
-                 const hasOnlyThisText = Array.from(parent.childNodes).every(
-                    child => child === node || (child.nodeType === Node.TEXT_NODE && !child.nodeValue.trim())
-                 );
-                 if (hasOnlyThisText) {
-                    parent.setAttribute('data-translate-key', textToKeyMap[text]);
-                 }
+    <!-- ÜBERNOMMEN: JavaScript für Sprachauswahl & Header -->
+    <script>
+        // --- Translations-Objekt ---
+        // HINWEIS: Du kannst hier Einträge entfernen, wenn sie auf der neuen Seite nicht benötigt werden
+        // (z.B. utmTitle, htmlDesc, etc.), aber die 'nav'-Einträge und 'footer'-Einträge sind wichtig.
+        const translations = {
+            'de': {
+                langName: 'DE',
+                flagUrl: 'https://flagcdn.com/w40/de.png',
+                navAbout: 'Über mich',
+                navContact: 'Kontakt',
+                languageLabelMobile: 'Sprache:',
+                // --- Alte Einträge (können entfernt oder für neue Inhalte genutzt werden) ---
+                heroTitle: 'Innovative <span class="gradient-text">Web-Tools</span> für <a href="https://usedparts.mercedes-benz.de/startseite/" style="color: white; text-decoration: underline;">MBUPS</a>',
+                heroSubtitle1: 'Hey! Ich bin Ayko, MBUPS-Praktikant der nützliche und einfach zu bedienende Web-Apps für euer Unternehmen entwickelt.',
+                heroSubtitle2: 'Meine Tools helfen dir, Arbeitszeit zu sparen und deinen Workflow zu automatisieren – ganz ohne komplizierte Technik.',
+                toolsTitle: 'Meine MBUPS-Tools',
+                utmTitle: 'UTM-Generator',
+                utmDesc: 'Erstellt schnell und fehlerfrei UTM-Parameter für präzises Kampagnen-Tracking.',
+                htmlTitle: 'HTML-Translator',
+                htmlDesc: 'Übersetzt Texte innerhalb von HTML-Code, ohne die Struktur zu zerstören.',
+                excelTitle: 'Excel-Comparison',
+                excelDesc: 'Vergleicht zwei Excel-Tabellen und hebt die Unterschiede deutlich hervor.',
+                anTitle: 'Articlenumber-Generator',
+                anDesc: 'Generiert einzigartige und formatierte Artikelnummern nach definierbaren Mustern.',
+                viewProject: 'Ansehen →',
+                // --- Footer Einträge (wichtig) ---
+                footerText: '© <span id="year-footer"></span> AykolinoApps. Mit Leidenschaft.',
+                footerDisclaimer: 'Diese Domain wird nicht für gewerbliche Zwecke genutzt.'
+            },
+            'en': {
+                langName: 'EN',
+                flagUrl: 'https://flagcdn.com/w40/gb.png',
+                navAbout: 'About Me',
+                navContact: 'Contact',
+                languageLabelMobile: 'Language:',
+                heroTitle: 'Innovative <span class="gradient-text">Web Tools</span> for <a href="https://usedparts.mercedes-benz.de/startseite/" style="color: white; text-decoration: underline;">MBUPS</a>',
+                heroSubtitle1: "Hey! I'm Ayko, an MBUPS intern developing useful and easy-to-use web apps for your company.",
+                heroSubtitle2: 'My tools help you save time and automate your workflow - without any complicated technology.',
+                toolsTitle: 'My MBUPS-Tools',
+                utmTitle: 'UTM-Generator',
+                utmDesc: 'Quickly and accurately creates UTM parameters for precise campaign tracking.',
+                htmlTitle: 'HTML-Translator',
+                htmlDesc: 'Translates text within HTML code without breaking the structure.',
+                excelTitle: 'Excel-Comparison',
+                excelDesc: 'Compares two Excel sheets and clearly highlights the differences.',
+                anTitle: 'Article Number-Generator',
+                anDesc: 'Generates unique and formatted article numbers according to definable patterns.',
+                viewProject: 'View →',
+                footerText: '© <span id="year-footer"></span> AykolinoApps. With passion.',
+                footerDisclaimer: 'This domain is not used for commercial purposes.'
+            },
+            'fr': {
+                langName: 'FR',
+                flagUrl: 'https://flagcdn.com/w40/fr.png',
+                navAbout: 'À propos de moi',
+                navContact: 'Contact',
+                languageLabelMobile: 'Langue:',
+                heroTitle: 'Outils Web <span class="gradient-text">Innovants</span> pour <a href="https://usedparts.mercedes-benz.de/startseite/" style="color: white; text-decoration: underline;">MBUPS</a>',
+                heroSubtitle1: "Salut ! Je suis Ayko, stagiaire chez MBUPS, et je développe des applications web utiles et simples d'utilisation pour votre entreprise.",
+                heroSubtitle2: "Mes outils vous aident à gagner du temps et à automatiser votre flux de travail, sans aucune technologie compliquée.",
+                toolsTitle: 'Mes outils MBUPS',
+                utmTitle: 'Générateur UTM',
+                utmDesc: 'Crée rapidement et sans erreur des paramètres UTM pour un suivi de campagne précis.',
+                htmlTitle: 'Traducteur HTML',
+                htmlDesc: 'Traduit le texte dans le code HTML sans en détruire la structure.',
+                excelTitle: 'Comparateur Excel',
+                excelDesc: 'Compare deux feuilles Excel et met clairement en évidence les différences.',
+                anTitle: "Générateur de numéros d'article",
+                anDesc: "Génère des numéros d'article uniques et formatés selon des modèles définissables.",
+                viewProject: 'Voir →',
+                footerText: '© <span id="year-footer"></span> AykolinoApps. Avec passion.',
+                footerDisclaimer: "Ce domaine n'est pas utilisé à des fins commerciales."
+            },
+            'es': {
+                langName: 'ES',
+                flagUrl: 'https://flagcdn.com/w40/es.png',
+                navAbout: 'Sobre mí',
+                navContact: 'Contacto',
+                languageLabelMobile: 'Idioma:',
+                heroTitle: 'Herramientas Web <span class="gradient-text">Innovadoras</span> para <a href="https://usedparts.mercedes-benz.de/startseite/" style="color: white; text-decoration: underline;">MBUPS</a>',
+                heroSubtitle1: '¡Hola! Soy Ayko, un pasante de MBUPS que desarrolla aplicaciones web útiles y fáciles de usar para su empresa.',
+                heroSubtitle2: 'Mis herramientas le ayudan a ahorrar tiempo y automatizar su flujo de trabajo, sin tecnología complicada.',
+                toolsTitle: 'Mis herramientas de MBUPS',
+                utmTitle: 'Generador UTM',
+                utmDesc: 'Crea parámetros UTM de forma rápida y sin errores para un seguimiento preciso de campañas.',
+                htmlTitle: 'Traductor HTML',
+                htmlDesc: 'Traduce texto dentro del código HTML sin romper la estructura.',
+                excelTitle: 'Comparador de Excel',
+                excelDesc: 'Compara dos hojas de Excel y resalta claramente las diferencias.',
+                anTitle: 'Generador de números de artículo',
+                anDesc: 'Genera números de artículo únicos y formateados según patrones definibles.',
+                viewProject: 'Ver →',
+                footerText: '© <span id="year-footer"></span> AykolinoApps. Con pasión.',
+                footerDisclaimer: 'Este dominio no se utiliza con fines comerciales.'
             }
-        }
-    });
-}
+        };
 
-function setLanguage(lang, event) {
-    if (event) event.preventDefault();
-    const langPack = translations[lang];
-    if (!langPack) return;
-    localStorage.setItem('language', lang);
-    document.documentElement.lang = lang;
+        // --- Haupt-Logik (unverändert übernommen) ---
+        document.addEventListener('DOMContentLoaded', () => {
 
-    const titleKey = document.documentElement.getAttribute('data-translate-key-title');
-    if (titleKey && langPack[titleKey]) document.title = langPack[titleKey];
-    
-    document.querySelectorAll('[data-translate-key]').forEach(el => {
-        const key = el.getAttribute('data-translate-key');
-        if (langPack[key]) el.innerHTML = langPack[key];
-    });
+            // Elemente abrufen
+            const langSwitcherButton = document.getElementById('lang-switcher-button');
+            const langSwitcherDropdown = document.getElementById('lang-switcher-dropdown');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const header = document.getElementById('main-header');
 
-    document.querySelectorAll('[data-translate-key-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-translate-key-placeholder');
-        if (langPack[key]) el.setAttribute('placeholder', langPack[key]);
-    });
+            // Funktion zum Setzen der Sprache
+            window.setLanguage = function(lang, event) {
+                if (event) event.preventDefault();
+                if (!translations[lang]) return;
 
-    const currentLangDesktop = document.getElementById('current-lang-desktop');
-    if (currentLangDesktop) currentLangDesktop.textContent = langPack.langName;
-    const currentFlagDesktop = document.getElementById('current-flag-desktop');
-    if (currentFlagDesktop) {
-        currentFlagDesktop.src = langPack.flagUrl;
-        currentFlagDesktop.alt = `Flag of ${lang}`;
-    }
-    
-    const yearSpan = document.getElementById('year') || document.getElementById('year-footer');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+                // Sprache im Local Storage speichern und auf HTML-Tag anwenden
+                localStorage.setItem('language', lang);
+                document.documentElement.lang = lang;
 
-    document.getElementById('lang-switcher-dropdown')?.classList.remove('open');
-    document.getElementById('mobile-menu')?.classList.add('hidden');
-};
+                // Alle Elemente mit `data-translate-key` durchgehen und übersetzen
+                document.querySelectorAll('[data-translate-key]').forEach(el => {
+                    const key = el.getAttribute('data-translate-key');
+                    if (translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
 
-document.addEventListener('DOMContentLoaded', () => {
-    addTranslateKeys();
-    const savedLang = localStorage.getItem('language') || 'de';
-    window.setLanguage(savedLang);
+                // Jahreszahl im Footer aktualisieren (nach Übersetzung)
+                const yearSpan = document.getElementById('year') || document.getElementById('year-footer');
+                if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-    document.getElementById('lang-switcher-button')?.addEventListener('click', (event) => {
-        event.stopPropagation();
-        document.getElementById('lang-switcher-dropdown')?.classList.toggle('open');
-    });
-    window.addEventListener('click', () => document.getElementById('lang-switcher-dropdown')?.classList.remove('open'));
-    document.getElementById('mobile-menu-button')?.addEventListener('click', () => document.getElementById('mobile-menu')?.classList.toggle('hidden'));
-    
-    const header = document.getElementById('main-header');
-    if(header) {
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('header-scrolled', window.scrollY > 10);
+                // Anzeige der Sprachauswahl aktualisieren
+                const currentLangDesktop = document.getElementById('current-lang-desktop');
+                const currentFlagDesktop = document.getElementById('current-flag-desktop');
+                if (currentLangDesktop) currentLangDesktop.textContent = translations[lang].langName;
+                if (currentFlagDesktop) {
+                    currentFlagDesktop.src = translations[lang].flagUrl;
+                    currentFlagDesktop.alt = `Flag of ${lang}`;
+                }
+
+                // Dropdown und mobiles Menü schließen
+                if(langSwitcherDropdown) langSwitcherDropdown.classList.remove('open');
+                if(mobileMenu) mobileMenu.classList.add('hidden');
+            }
+
+            // Gespeicherte Sprache beim Laden der Seite anwenden
+            const savedLang = localStorage.getItem('language') || 'de';
+            window.setLanguage(savedLang);
+
+            // --- Event Listeners ---
+
+            // Sprachauswahl Dropdown (Desktop)
+            if (langSwitcherButton) {
+                langSwitcherButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    langSwitcherDropdown.classList.toggle('open');
+                });
+            }
+
+            // Klick ausserhalb des Dropdowns schliesst es
+            window.addEventListener('click', () => {
+                if (langSwitcherDropdown && langSwitcherDropdown.classList.contains('open')) {
+                    langSwitcherDropdown.classList.remove('open');
+                }
+            });
+            
+            // Mobiles Menü
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Header Scroll-Effekt
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+
         });
-    }
-});
-// Make setLanguage globally available for onclick attributes
-window.setLanguage = setLanguage;
-</script></body></html>
+    </script>
+</body>
+</html>
+
+
+
+
+
